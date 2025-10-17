@@ -23,7 +23,6 @@ function Home() {
                 </button>
             </Link>
         </div>
-        
       </section>
     </div>
   );
