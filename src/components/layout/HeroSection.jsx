@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 // ¡ESTA ES LA IMPORTACIÓN!
 import { motion } from "framer-motion"; 
 import { Spotlight } from "../ui/Spotlight";
+import logo from '../../assets/Maroautos.png'; // <-- agregada
 
 export function HeroSection() {
   return (
@@ -19,6 +20,14 @@ export function HeroSection() {
         transition={{ duration: 0.5, delay: 0.5 }}
         className="p-4 max-w-7xl mx-auto relative z-10 w-full pt-6 md:pt-0"
       >
+        {/* EL LOGO */}
+        <div className="flex justify-center mb-6">
+          <img
+            src={logo}
+            alt="Maros Auto Sales Logo"
+            className="w-auto h-14 sm:h-16 md:h-20 lg:h-28 object-contain"
+          />
+        </div>
         {/* EL RESTO DEL CONTENIDO */}
         <h1 className="text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
           Encuentra tu próximo vehiculo de ensueño con nosotros
