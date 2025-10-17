@@ -1,10 +1,10 @@
 // Archivo creado automáticamente. Por favor, pega el código correspondiente.
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { mockVehicles } from "../../data/mockVehicles";
 
 export function FeaturedVehicles() {
-  // normalizar campos para evitar problemas con claves en español/inglés
   const normalized = mockVehicles.map((v) => ({
     id: v.id,
     marca: v.marca ?? v.make ?? "",
@@ -16,26 +16,45 @@ export function FeaturedVehicles() {
     ...v,
   }));
 
-  // tomar los destacados; si no hay, fallback con los primeros 2
   const featured = normalized.filter((f) => f.esDestacado);
-  const items = featured.length ? featured.slice(0, 2) : normalized.slice(0, 2);
+  const items = featured.length ? featured.slice(0, 3) : normalized.slice(0, 3);
 
-  if (items.length === 0) {
-    return null;
-  }
+  if (items.length === 0) return null;
+
+  const container = {
+    hidden: { opacity: 0, y: 12 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { staggerChildren: 0.12, ease: "easeOut", duration: 0.45 },
+    },
+  };
+
+  const card = {
+    hidden: { opacity: 0, y: 18, scale: 0.995 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+  };
 
   return (
-    <section className="max-w-7xl mx-auto px-4">
+    <motion.section
+      className="max-w-7xl mx-auto px-4 -mt-4 md:-mt-8"
+      variants={container}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+    >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {items.map((item, idx) => {
           const isLarge = idx === 0;
           return (
-            <article
+            <motion.article
               key={item.id}
-              className={`${isLarge ? "md:col-span-2" : "md:col-span-1"} bg-neutral-900 rounded-xl overflow-hidden border border-neutral-800 shadow-sm`}
+              variants={card}
+              whileHover={{ scale: 1.02 }}
+              className={`${isLarge ? "md:col-span-2" : "md:col-span-1"} bg-neutral-900 rounded-xl overflow-hidden border border-neutral-800 shadow-sm transform will-change-transform`}
             >
               <Link to={`/vehiculo/${item.id}`} className="block group">
-                <div className={`relative ${isLarge ? "h-56 md:h-96" : "h-44 md:h-56"} w-full bg-black/40`}>
+                <div className={`${isLarge ? "h-56 md:h-96" : "h-44 md:h-56"} relative w-full bg-black/40`}>
                   <img
                     src={item.imagenUrl}
                     alt={`${item.marca} ${item.modelo}`}
@@ -60,10 +79,10 @@ export function FeaturedVehicles() {
                   </div>
                 </div>
               </Link>
-            </article>
+            </motion.article>
           );
         })}
       </div>
-    </section>
+    </motion.section>
   );
 }
