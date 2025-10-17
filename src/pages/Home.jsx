@@ -13,9 +13,7 @@ function Home() {
         <h2 className="text-4xl font-extrabold text-center mb-10 dark:text-white text-gray-900">
           Nuestra Colección Destacada
         </h2>
-        
         <FeaturedVehicles /> 
-        
         <div className="text-center mt-12">
             <Link to="/inventario">
                  <button className="px-8 py-3 rounded-full bg-blue-500 text-white text-lg font-semibold hover:bg-blue-600 transition duration-300 shadow-xl">

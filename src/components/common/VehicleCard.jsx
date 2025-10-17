@@ -17,7 +17,7 @@ export function VehicleCard({ vehicle }) {
                 <img
                     src={vehicle.imagenUrl}
                     alt={`${vehicle.marca} ${vehicle.modelo}`}
-                    className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+                    className="w-full h-44 md:h-56 lg:h-64 object-cover md:object-contain object-center transition-all duration-2005"
                     loading="lazy"
                 />
                 <div className="absolute top-0 right-0 p-2 bg-black bg-opacity-70 text-white text-xs rounded-bl-xl font-medium">
