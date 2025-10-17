@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { mockVehicles } from "../data/mockVehicles";
 import { VehicleGallery } from "../components/common/VehicleGallery";
+import { FaCarSide, FaCalendarAlt, FaTachometerAlt, FaPalette, FaBarcode } from 'react-icons/fa';
+import { FaKey } from 'react-icons/fa';
 
 function DetalleVehiculo() {
   const { id } = useParams();
@@ -80,8 +82,7 @@ function DetalleVehiculo() {
                 Descripción General
               </h2>
               <p className="text-gray-700 dark:text-neutral-300">
-                {vehicle.descripcionCorta} (Aquí iría una descripción mucho más
-                detallada sobre el motor, historial y estado del vehículo).
+                {vehicle.descripcionCorta} 
               </p>
             </div>
           </div>
@@ -107,30 +108,57 @@ function DetalleVehiculo() {
               </Link>
             </div>
 
-            <div className="p-6 bg-white dark:bg-neutral-800 rounded-xl shadow-lg dark:shadow-none border dark:border-neutral-700">
-              <h2 className="text-2xl font-bold dark:text-white mb-4">
-                Ficha Técnica
-              </h2>
-              <ul className="space-y-3 dark:text-neutral-300">
-                <li className="flex justify-between border-b border-neutral-200 dark:border-neutral-700 pb-2">
-                  <span className="font-medium">Marca / Modelo:</span>{" "}
-                  <span>
-                    {vehicle.marca} {vehicle.modelo}
-                  </span>
-                </li>
-                <li className="flex justify-between border-b border-neutral-200 dark:border-neutral-700 pb-2">
-                  <span className="font-medium">Año:</span> <span>{vehicle.año}</span>
-                </li>
-                <li className="flex justify-between border-b border-neutral-200 dark:border-neutral-700 pb-2">
-                  <span className="font-medium">Kilometraje:</span>{" "}
-                  <span>
-                    {vehicle.kilometraje.toLocaleString("es-ES")} km
-                  </span>
-                </li>
-                <li className="flex justify-between">
-                  <span className="font-medium">Color:</span> <span>{vehicle.color}</span>
-                </li>
-              </ul>
+            <div className="mt-6 bg-neutral-900 rounded-lg p-6">
+              <h3 className="font-bold text-lg mb-3 text-white">Ficha Técnica</h3>
+              <dl className="text-sm text-neutral-300 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <FaCarSide className="w-5 h-5 text-blue-400" />
+                    <span className="text-neutral-300">Marca / Modelo</span>
+                  </div>
+                  <span className="font-medium text-white">{vehicle.marca} {vehicle.modelo}</span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <FaCalendarAlt className="w-5 h-5 text-blue-400" />
+                    <span className="text-neutral-300">Año</span>
+                  </div>
+                  <span className="text-neutral-200">{vehicle.año}</span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <FaTachometerAlt className="w-5 h-5 text-blue-400" />
+                    <span className="text-neutral-300">Kilometraje</span>
+                  </div>
+                  <span className="text-neutral-200">{vehicle.kilometraje?.toLocaleString('es-ES') ?? '-'} km</span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <FaBarcode className="w-5 h-5 text-blue-400" />
+                    <span className="text-neutral-300">VIN</span>
+                  </div>
+                  <span className="font-mono text-neutral-200">{vehicle.vin ?? vehicle.VIN ?? "-"}</span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <FaKey className="w-5 h-5 text-blue-400" />
+                    <span className="text-neutral-300">Llaves</span>
+                  </div>
+                  <span className="text-neutral-200">{vehicle.llaves ?? vehicle.numeroLlaves ?? "-"}</span>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <FaPalette className="w-5 h-5 text-blue-400" />
+                    <span className="text-neutral-300">Color</span>
+                  </div>
+                  <span className="text-neutral-200">{vehicle.color || "-"}</span>
+                </div>
+              </dl>
             </div>
           </div>
         </div>

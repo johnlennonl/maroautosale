@@ -1,48 +1,59 @@
 // Archivo creado automáticamente. Por favor, pega el código correspondiente.
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 export function VehicleCard({ vehicle }) {
-    
-    const formatPrice = (price) => {
-        return `$${price.toLocaleString('es-ES')}`;
-    };
+  const formatPrice = (price) => {
+    if (!price && price !== 0) return "-";
+    return `$${Number(price).toLocaleString("es-ES")}`;
+  };
 
-    return (
-        <Link 
-            to={`/vehiculo/${vehicle.id}`} 
-            className="block overflow-hidden rounded-xl shadow-2xl hover:shadow-blue-500/50 transition duration-300 transform hover:-translate-y-1 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700"
+  const vin = vehicle.vin ?? vehicle.VIN ?? "";
+  const src = vehicle.images?.[0] || vehicle.imagenUrl || vehicle.image || "/assets/placeholder.jpg";
+  const id = vehicle.id ?? vehicle.ID ?? vehicle._id;
+
+  return (
+    <article className="bg-neutral-900 rounded-lg overflow-hidden shadow-md">
+      {/* Parte clicable (imagen + título) */}
+      <Link to={`/vehiculo/${id}`} className="block">
+        <div className="w-full bg-black/40">
+          <img
+            src={src}
+            alt={vehicle.modelo || vehicle.model}
+            className="w-full h-44 md:h-56 lg:h-64 object-cover md:object-contain object-center transition-all duration-200"
+          />
+        </div>
+
+        <div className="p-4">
+          <h3 className="font-semibold text-lg text-white">{vehicle.marca || vehicle.make} {vehicle.modelo || vehicle.model}</h3>
+
+          {vin && (
+            <div className="text-xs text-neutral-400 mt-1">
+              <span className="font-medium text-neutral-300">VIN: </span>
+              <span className="font-mono">{vin}</span>
+            </div>
+          )}
+
+          <p className="text-sm text-neutral-400 mt-2">
+            {vehicle.descripcionCorta || vehicle.description || ""}
+          </p>
+        </div>
+      </Link>
+
+      {/* Botón de detalles separado (no anidado) */}
+      <div className="p-4 pt-0 flex items-center justify-between">
+        <div className="text-blue-400 font-semibold">
+          {formatPrice(vehicle.precio ?? vehicle.price)}
+        </div>
+
+        <Link
+          to={`/vehiculo/${id}`}
+          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium hover:bg-blue-700 transition"
+          aria-label={`Ver detalles de ${vehicle.marca} ${vehicle.modelo}`}
         >
-            <div className="relative h-48 sm:h-64 overflow-hidden">
-                <img
-                    src={vehicle.imagenUrl}
-                    alt={`${vehicle.marca} ${vehicle.modelo}`}
-                    className="w-full h-44 md:h-56 lg:h-64 object-cover md:object-contain object-center transition-all duration-2005"
-                    loading="lazy"
-                />
-                <div className="absolute top-0 right-0 p-2 bg-black bg-opacity-70 text-white text-xs rounded-bl-xl font-medium">
-                    {vehicle.año} | {vehicle.kilometraje.toLocaleString('es-ES')} km
-                </div>
-            </div>
-
-            <div className="p-4 sm:p-6">
-                
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
-                    {vehicle.marca} {vehicle.modelo}
-                </h3>
-
-                <p className="text-2xl font-extrabold text-blue-600 dark:text-blue-400 mb-3">
-                    {formatPrice(vehicle.precio)}
-                </p>
-
-                <p className="mt-2 text-sm text-gray-500 dark:text-neutral-400 h-10 overflow-hidden">
-                    {vehicle.descripcionCorta}
-                </p>
-
-                <span className="mt-4 inline-block w-full text-center rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-600">
-                    Ver Detalles
-                </span>
-            </div>
+          Ver Detalles →
         </Link>
-    );
+      </div>
+    </article>
+  );
 }
