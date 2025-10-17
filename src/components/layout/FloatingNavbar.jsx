@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../ui/cn"; 
 import { Link } from "react-router-dom"; 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const navItems = [
   { name: "Inicio", link: "/" },
@@ -51,3 +52,15 @@ export const FloatingNavbar = ({ className }) => {
     </AnimatePresence>
   );
 };
+
+function App() {
+  return (
+    <Router>
+      <ScrollToTop />
+      <FloatingNavbar />
+      <Footer />
+    </Router>
+  );
+}
+
+export default App;
