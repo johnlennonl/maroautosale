@@ -9,7 +9,7 @@ import logo from '../../assets/Maroautos.png'; // <-- agregada
 
 export function HeroSection() {
   return (
-    <div className="w-full flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden h-[22rem] md:h-[36rem]">
+    <div className="w-full flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-visible min-h-[28rem] md:min-h-[36rem]">
       
       {/* Spotlight escalado pero dentro del contenedor (no provoca scroll) */}
       <Spotlight className="absolute inset-0 scale-125 opacity-30 pointer-events-none" fill="white" />
@@ -18,7 +18,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.5 }}
-        className="p-4 max-w-7xl mx-auto relative z-10 w-full pt-6 md:pt-0"
+        className="p-4 max-w-7xl mx-auto relative z-10 w-full pt-6 md:pt-0 pb-6"
       >
         {/* EL LOGO */}
         <div className="flex justify-center mb-6">
@@ -37,14 +37,14 @@ export function HeroSection() {
           Ofrecemos la mejor selección de vehículos y de alto rendimiento. Calidad y transparencia garantizadas.
         </p>
         
-        <div className="flex justify-center mt-8 space-x-4">
-            <Link to="/inventario">
-                <button className="px-6 py-2 rounded-full bg-blue-600 text-white text-lg font-semibold hover:bg-blue-700 transition duration-200 shadow-md">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 px-4">
+            <Link to="/inventario" className="w-full sm:w-auto">
+                <button className="w-full sm:w-auto px-6 py-3 rounded-full bg-blue-600 text-white text-lg font-semibold hover:bg-blue-700 transition duration-200 shadow-md">
                     Ver Inventario
                 </button>
             </Link>
-            <Link to="/contacto">
-                <button className="px-6 py-2 rounded-full bg-transparent border border-neutral-600 text-neutral-300 text-lg font-semibold hover:bg-neutral-800 transition duration-200">
+            <Link to="/contacto" className="w-full sm:w-auto">
+                <button className="w-full sm:w-auto px-6 py-3 rounded-full bg-transparent border border-neutral-600 text-neutral-300 text-lg font-semibold hover:bg-neutral-800 transition duration-200">
                     Pregunta a un experto
                 </button>
             </Link>
