@@ -8,7 +8,7 @@ import { Spotlight } from "../ui/Spotlight";
 
 export function HeroSection() {
   return (
-    <div className="h-[40rem] w-full flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden">
+    <div className="w-full flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden h-[22rem] md:h-[36rem]">
       
       {/* Spotlight escalado pero dentro del contenedor (no provoca scroll) */}
       <Spotlight className="absolute inset-0 scale-125 opacity-30 pointer-events-none" fill="white" />
@@ -17,7 +17,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.5 }}
-        className="p-4 max-w-7xl mx-auto relative z-10 w-full pt-20 md:pt-0"
+        className="p-4 max-w-7xl mx-auto relative z-10 w-full pt-6 md:pt-0"
       >
         {/* EL RESTO DEL CONTENIDO */}
         <h1 className="text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
