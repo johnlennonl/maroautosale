@@ -17,7 +17,7 @@ function App() {
     <Router>
       <ScrollToTop />
       <FloatingNavbar />
-      <div className="pt-16 md:pt-24 min-h-screen bg-gray-50 dark:bg-black">g-black">
+      <div className="pt-16 md:pt-24 min-h-screen bg-gray-50 dark:bg-black">
         <Routes>
           {/* Rutas principales */}
           <Route path="/" element={<Home />} />
